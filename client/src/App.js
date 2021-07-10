@@ -1,102 +1,92 @@
-import React, {Component} from 'react';
-import './App.css';
-//import Header from './Components/Header';
+
+import React, {useState, useEffect} from "react";
+import "./styles.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from './Containers/Home'
 import SignUp from './Components/SignUp'
 import LoginForm from './Components/LoginForm'
 import Products from './Containers/Products';
-//import NavBar from './Components/Navbar';
-//import Footer from './Components/Footer';
-//import Home from './Home';
-// import {Switch, Route } from "react-router-dom";
 import Cart from './Containers/Cart';
-//import CartItem from './Component/CartItem';
-import Navbar from "react-bootstrap/Navbar";
-import Routes from './Routes';
-import Nav from "react-bootstrap/Nav";
-import { LinkContainer } from "react-router-bootstrap";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { render } from 'react-dom';
 
-class App extends Component {
-  
-
-  // useEffect(() => {
-  //   // auto-login
-  //   fetch("/me").then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
-
-  // if (!user) return <LoginForm onLogin={setUser}/>
+export default function App() {
+let [user, setUser]= useState({})
+let [cartProducts, setCartProducts]= useState([])
 
 
-   
+        const addToCart = (product) => {
+          setCartProducts([...cartProducts, product])
+            // let cartCopy = [...cartProducts];
+            // let {ID} = product;
+            // let existingProduct = cartCopy.find(cartProduct => cartProduct.ID === ID);
+            // if (existingProduct) {
+            //     existingProduct.quantity += product.quantity //update item
+            // } else { //if item doesn't exist, simply add it
+            //     cartCopy.push(products)
+            // }
+            // setCartProducts(cartCopy)
+            // let stringCart = JSON.stringify(cartCopy);
+            // localStorage.setItem("cart", stringCart)
+            }
+        
+            
+       let removeFromCart = (products) => {
+           cartProducts.filter((x) =>x.id !== products.id);
+           setCartProducts([]);
+       }
+useEffect(() => {
+  // auto-login
+  fetch("/me").then((r) => {
+    if (r.ok) {
+      r.json().then((user) => setUser(user));
+    }
+  });
+}, []);
 
-// state = {
-//   products:[],
-//   total: 0,
-//   cartItems: [],
-//   users:[],
-//     name: "",
-//     email: "",
-//     isLogged: false,
-//     currentUser: {},
-//     error: "",
-// }
+if (!user) return <LoginForm onLogin={setUser}/>
 
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">Products</Link>
+            </li>
+            <li>
+              <Link to="/cart">Cart</Link>
+            </li>
+            <li>
+              <Link to="/signup">signup</Link>
+            </li>
+            <li>
+              <Link to="/loginform">login</Link>
+            </li>
+          </ul>
+        </nav>
 
-
-
-  // console.log(products)
-//   handleCartItems= (data) => {
-//     let collection=[]
-//     data.map ((cartItems)  => {
-//       let x = cartItems.product
-//       collection.push(x)
-//     })
-
-//   console.log(collection)
-//   this.setState({
-//   cartItems: collection
-// })}
-
-
-
-render(){
-return(
-        <div className="App container py-3">
-          <Router>
-          <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
-          <LinkContainer to="/">
-            <Navbar.Brand className="font-weight-bold text-muted">
-              OneStopCoffee
-              </Navbar.Brand>
-              </LinkContainer>
-              <Navbar.Toggle/>
-              <Navbar.Collapse className="justify-content-end">
-              <Nav activeKey={window.location.pathname}>
-                    <LinkContainer to="/Products">
-                    <Nav.Link>Products</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/cart">
-                    <Nav.Link>Purchase</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/SignUp">
-                    <Nav.Link>Signup</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/LoginForm">
-                   <Nav.Link href="/login">Login</Nav.Link>
-                   </LinkContainer>
-                  </Nav>
-             </Navbar.Collapse>
-              </Navbar>
-              </Router>
-              <Routes/>
-              </div>
-);
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/products">
+            <Products addProduct={addToCart} />
+          </Route>
+          <Route path="/cart">
+            <Cart cartProducts={cartProducts}/>
+          </Route>
+          <Route path="/signup">
+            <SignUp onLogin={setUser}/>
+          </Route>
+          <Route path="/loginform">
+            <LoginForm onLogin={setUser}/>
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }
-}
-
-export default App;

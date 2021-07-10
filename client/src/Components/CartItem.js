@@ -1,24 +1,39 @@
-// import React from 'react';
 
-//     export default class CartItem extends React.Component {
-//       constructor(props) {
-//         super(props);
-//         this.state = {quantity: 1}
-//       }
+import React, {Component} from 'react';
+import ProductsCard from '../Components/ProductsCard'
 
-//       render(){
-//         const { product } = this.props;
-//         return (
-//           <div className="card" style={{ marginBottom: "10px"}}>
-//             <div className="card-body">
-//               <h4 className="card-title">{product.name}</h4>
-//               <h5 className="card-text"><small>price: </small>${product.price}</h5>
-//               <span className="card-text text-success">
-//                   <small>Quantity: </small>{product.qty}</span>
-//               <button className="btn btn-sm btn-warning float-right" 
-//                   onClick={() => this.props.remove(product)}>Remove from cart</button>
-//             </div>
-//           </div>
-//          )
-//       }
-//     }
+class CartItems extends Component {
+
+        state = {
+            CartItems:[]
+        }
+      
+        componentDidMount () {
+          
+            fetch("/products")
+                         .then((r) => r.json())
+                         .then((data) => this.setState({products: data}))
+                   
+        }
+          
+        render() {
+            let card = this.state.products.map(product => (
+                <ProductsCard
+                  product ={product}
+                  key = {product.id}
+                  handleClick = {this.props.addProduct}
+                  handleClickDelete = {this.props.deleteProduct}
+            />))
+      
+            return(
+              <div className="ui four column grid">
+                  <div className="title">Your Cart</div>
+              <div className="row">
+                 {card}
+              </div>
+            </div>
+          );
+        }
+      }
+      
+      export default Products;

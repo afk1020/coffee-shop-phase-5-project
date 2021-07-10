@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './ProductsCard.css';
 import { Link } from 'react-router-dom'
 
-class ProductsCard extends Component {
+class CartProductsCard extends Component {
   
   
     render() {
@@ -30,14 +30,7 @@ class ProductsCard extends Component {
         <p><span style={{fontWeight: "bold"}}>quantity: </span>{this.props.product.quantity} </p>
        
       </div>
-      <div className="btnn" 
-      onClick = {this.props.handleClick}>
       
-          <button>
-            <a>
-              Add to cart
-            </a>
-          </button>
           <div className="btnn" 
           onClick = {this.props.handleClickDelete}>
           <button>
@@ -48,10 +41,9 @@ class ProductsCard extends Component {
           </div>
       </div>
       </div>
-      </div>
     );
   }
 
 }
 
-export default ProductsCard;
+export default CartProductsCard;

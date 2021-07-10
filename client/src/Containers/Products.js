@@ -8,17 +8,19 @@ class Products extends Component {
   }
 
   componentDidMount () {
+    
       fetch("/products")
     			   .then((r) => r.json())
     			   .then((data) => this.setState({products: data}))
+             
   }
     
   render() {
-      let card = this.props.productData.map(product => (
+      let card = this.state.products.map(product => (
           <ProductsCard
             product ={product}
             key = {product.id}
-            handleClick = {this.props.addProduct}
+            handleClick = {() => this.props.addProduct(product)}
       />))
 
       return(
@@ -33,18 +35,7 @@ class Products extends Component {
 
 export default Products;
 
-// componentDidMount () {
-//   fetch("/products")
-// 			   .then((r) => r.json())
-// 			   .then((data) => this.setState({products: data}))
 
-//   // fetch("/carts")
-// 	// 		   .then((r) => r.json())
-// 	// 		   .then((data) => this.setState({products: data}))   
-
-//   axios.get("/cartitems", {crossDomain: true}, {withCredentials: true})
-//    .then(response => this.handleMyCart(response.data.myCart))
-// }
 
 
 // addProduct =(product) => {
