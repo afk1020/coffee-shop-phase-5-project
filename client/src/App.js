@@ -5,34 +5,25 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from './Containers/Home'
 import SignUp from './Components/SignUp'
 import LoginForm from './Components/LoginForm'
+import Logout from './Components/Logout'
 import Products from './Containers/Products';
 import Cart from './Containers/Cart';
 
 export default function App() {
 let [user, setUser]= useState({})
-let [cartProducts, setCartProducts]= useState([])
+let [cartProducts, setCartProducts]= useState([]);
+// let [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
-        const addToCart = (product) => {
-          setCartProducts([...cartProducts, product])
-            // let cartCopy = [...cartProducts];
-            // let {ID} = product;
-            // let existingProduct = cartCopy.find(cartProduct => cartProduct.ID === ID);
-            // if (existingProduct) {
-            //     existingProduct.quantity += product.quantity //update item
-            // } else { //if item doesn't exist, simply add it
-            //     cartCopy.push(products)
-            // }
-            // setCartProducts(cartCopy)
-            // let stringCart = JSON.stringify(cartCopy);
-            // localStorage.setItem("cart", stringCart)
-            }
-        
+  const addToCart = (product) => {
+     setCartProducts([...cartProducts, product])
+  }
+  
+ 
             
-       let removeFromCart = (products) => {
-           cartProducts.filter((x) =>x.id !== products.id);
-           setCartProducts([]);
-       }
+  let removeFromCart = (products) => {
+      cartProducts.filter((x) =>x.id !== products.id);
+      setCartProducts([]);
+  }
 useEffect(() => {
   // auto-login
   fetch("/me").then((r) => {
@@ -43,6 +34,8 @@ useEffect(() => {
 }, []);
 
 if (!user) return <LoginForm onLogin={setUser}/>
+
+ 
 
   return (
     <Router>
@@ -64,6 +57,12 @@ if (!user) return <LoginForm onLogin={setUser}/>
             <li className="nav-bar-ul-li a">
               <Link to="/loginform">login</Link>
             </li>
+            <li className="nav-bar-ul-li a">
+              <Link to="/logout">Logout</Link>
+            </li>
+            <li className="nav-bar-ul-li a">
+              <Link to="/profile">Profile</Link>
+            </li>
           </ul>
         </nav>
 
@@ -82,6 +81,13 @@ if (!user) return <LoginForm onLogin={setUser}/>
           <Route path="/loginform">
             <LoginForm onLogin={setUser}/>
           </Route>
+          <Route path="/logout">
+            <Logout setUser={setUser}/>
+          </Route>
+          
+          {/* <Route path="/profile">
+            <Home />
+          </Route> */}
           <Route path="/">
             <Home />
           </Route>

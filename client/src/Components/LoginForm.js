@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import { useHistory } from 'react-router';
 
 function LoginForm({ onLogin }) {
   let [name, setName] = useState("");
@@ -25,14 +27,12 @@ function LoginForm({ onLogin }) {
         r.json().then((err) => setErrors(err.errors));
       }
     });
+    history.push('/products')
   }
-  // handleLogoutClick(() => {
-  //   fetch("/logout", { method: "DELETE" }).then((r) => {
-  //     if (r.ok) {
-  //       setUser(null);
-  //     }
-  //   });
-  // }
+  
+  const history = useHistory()
+
+  
   return (
     <div className="Login">
     <Form onSubmit={handleSubmit}>
@@ -53,10 +53,11 @@ function LoginForm({ onLogin }) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Group>
+     
       <Button block size="lg" type="submit" >
       {isLoading ? "Loading..." : "Login"}
      </Button>
-   
+     
     </Form>
   </div>    
   );

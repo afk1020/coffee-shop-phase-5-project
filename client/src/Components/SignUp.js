@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 function SignUpForm({ onLogin }) {
   const [name, setName] = useState("");
@@ -8,6 +10,7 @@ function SignUpForm({ onLogin }) {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,8 +34,11 @@ function SignUpForm({ onLogin }) {
         r.json().then((err) => setErrors(err.errors));
       }
     });
+    history.push('/products')
   }
-
+  
+  const history = useHistory()
+  
   return (
     <div className="SignUp">
     <Form onSubmit={handleSubmit}>
@@ -65,12 +71,8 @@ function SignUpForm({ onLogin }) {
             id="password_confirmation"
           />
         </Form.Group>
-        <Button
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-        >
+        
+        <Button block size="lg" type="submit" variant="success">
           {isLoading ? "Loading..." : "Sign Up"}
         </Button>
         
