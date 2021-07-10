@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from "react";
-import "./styles.css";
+import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from './Containers/Home'
 import SignUp from './Components/SignUp'
@@ -46,22 +46,22 @@ if (!user) return <LoginForm onLogin={setUser}/>
 
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
+      <div className="App">
+        <nav className="nav-bar">
+          <ul className="nav-bar-ul">
+            <li className="nav-bar-ul-li a">
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li className="nav-bar-ul-li a">
               <Link to="/products">Products</Link>
             </li>
-            <li>
+            <li className="nav-bar-ul-li a">
               <Link to="/cart">Cart</Link>
             </li>
-            <li>
+            <li className="nav-bar-ul-li a">
               <Link to="/signup">signup</Link>
             </li>
-            <li>
+            <li className="nav-bar-ul-li a">
               <Link to="/loginform">login</Link>
             </li>
           </ul>
