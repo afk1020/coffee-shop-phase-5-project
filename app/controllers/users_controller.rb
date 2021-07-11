@@ -12,6 +12,12 @@ end
     render json: user, status: :created
   end
 
+  def update
+    user = User.find_by(id: params[:id])
+    user.update(user2_params)
+    render json: user
+  end
+
   def show
     render json: @current_user
   end
@@ -28,4 +34,7 @@ end
     params.permit(:name, :password)
   end
 
+  def user2_params
+    params.permit(:id, :name)
+  end
 end

@@ -28,9 +28,12 @@ let [cartProducts, setCartProducts]= useState([]);
   function handleDeleteUser(deletedUsers) {
     setUser((user) =>
       user.id !== deletedUsers.id)
-    
   }
-  
+
+  function handleEditUser(editUsers) {
+    setUser((user) =>
+      user.name !== editUsers.name)
+  }
   
   // const {id, name, password_digest} = user
 
@@ -94,7 +97,7 @@ useEffect(() => {
             <Logout setUser={setUser}/>
           </Route>
           <Route path="/profile">
-            <Profile user={user} onDeleteUser={handleDeleteUser}/>
+            <Profile user={user} setUser={setUser} onDeleteUser={handleDeleteUser} onEditUser={handleEditUser}/>
           </Route>
           <Route exact path="/">
             <Home />
