@@ -17,9 +17,7 @@ let [cartProducts, setCartProducts]= useState([]);
   const addToCart = (product) => {
      setCartProducts([...cartProducts, product])
   }
-  
- 
-            
+             
   let removeFromCart = (products) => {
       cartProducts.filter((x) =>x.id !== products.id);
       setCartProducts([]);
@@ -73,7 +71,7 @@ if (!user) return <LoginForm onLogin={setUser}/>
             <Products addProduct={addToCart} />
           </Route>
           <Route path="/cart">
-            <Cart cartProducts={cartProducts}/>
+            <Cart cartProducts={cartProducts} removeFromCart={removeFromCart}/>
           </Route>
           <Route path="/signup">
             <SignUp onLogin={setUser}/>

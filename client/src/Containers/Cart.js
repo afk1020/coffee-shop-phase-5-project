@@ -8,7 +8,7 @@ class Cart extends Component {
             product ={product}
             key = {product.id}
             handleClick = {this.props.addProduct}
-            handleClickDelete = {this.props.deleteProduct}
+            handleClickDelete = {this.props.removeFromCart}
       />))
         return(
       <div className="ui segment inverted olive bot-army">

@@ -10,6 +10,8 @@ function LoginForm({ onLogin }) {
   let [errors, setErrors] = useState([]);
   let [isLoading, setIsLoading] = useState(false);
 
+  const history = useHistory()
+  
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
@@ -30,7 +32,7 @@ function LoginForm({ onLogin }) {
     history.push('/products')
   }
   
-  const history = useHistory()
+
 
   
   return (

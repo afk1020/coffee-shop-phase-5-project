@@ -38,14 +38,7 @@ class ProductsCard extends Component {
               Add to cart
             </a>
           </button>
-          <div className="btnn" 
-          onClick = {this.props.handleClickDelete}>
-          <button>
-            <a>
-              Remove from cart
-            </a>
-          </button>
-          </div>
+          
       </div>
       </div>
       </div>
