@@ -8,13 +8,15 @@ import LoginForm from './Components/LoginForm'
 import Logout from './Components/Logout'
 import Products from './Containers/Products';
 import Cart from './Containers/Cart';
+import Profile from './Containers/Profile'
+
 
 export default function App() {
 let [user, setUser]= useState({})
 let [cartProducts, setCartProducts]= useState([]);
 // let [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const addToCart = (product) => {
+  let addToCart = (product) => {
      setCartProducts([...cartProducts, product])
   }
              
@@ -22,6 +24,16 @@ let [cartProducts, setCartProducts]= useState([]);
       cartProducts.filter((x) =>x.id !== products.id);
       setCartProducts([]);
   }
+ 
+  function handleDeleteUser(deletedUsers) {
+    setUser((user) =>
+      user.id !== deletedUsers.id)
+    
+  }
+  
+  
+  // const {id, name, password_digest} = user
+
 useEffect(() => {
   // auto-login
   fetch("/me").then((r) => {
@@ -31,9 +43,8 @@ useEffect(() => {
   });
 }, []);
 
-if (!user) return <LoginForm onLogin={setUser}/>
+// if (!user) return <LoginForm onLogin={setUser}/>
 
- 
 
   return (
     <Router>
@@ -82,11 +93,10 @@ if (!user) return <LoginForm onLogin={setUser}/>
           <Route path="/logout">
             <Logout setUser={setUser}/>
           </Route>
-          
-          {/* <Route path="/profile">
-            <Home />
-          </Route> */}
-          <Route path="/">
+          <Route path="/profile">
+            <Profile user={user} onDeleteUser={handleDeleteUser}/>
+          </Route>
+          <Route exact path="/">
             <Home />
           </Route>
         </Switch>

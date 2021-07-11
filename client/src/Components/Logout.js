@@ -12,7 +12,7 @@ function LogOut({ setUser }) {
       if (r.ok) {setUser(null)
       }
     });
-    history.push('/home')
+    history.push('/')
   }
   
     

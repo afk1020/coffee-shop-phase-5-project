@@ -11,7 +11,7 @@ function LoginForm({ onLogin }) {
   let [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory()
-  
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
