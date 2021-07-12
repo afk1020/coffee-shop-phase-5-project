@@ -25,9 +25,9 @@ class ProductsCard extends Component {
         <h4>{this.props.product.name}</h4>
       </div>
       <div className="card-body">
-      <p><span style={{fontWeight: "bold"}}>price: </span> {this.props.product.price} </p>
+      <p><span style={{fontWeight: "bold"}}>price: </span> ${this.props.product.price} per lb</p>
         <p><span style={{fontWeight: "bold"}}>description: </span> {this.props.product.description} </p>
-        <p><span style={{fontWeight: "bold"}}>quantity: </span>{this.props.product.quantity} </p>
+        {/* <p><span style={{fontWeight: "bold"}}>quantity: </span>{this.props.product.quantity} </p> */}
        
       </div>
       <div className="btnn" 

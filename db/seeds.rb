@@ -15,7 +15,7 @@ puts '🌱 Seeding coffees...'
 
     Product.create(name: "Arabica", price: 9, description: "sweet and delicate flavor", quantity: 50, image_url: "https://sc04.alicdn.com/kf/UTB8wkWhBGrFXKJk43Ovq6ybnpXas.jpg" )
     Product.create(name: "Robusta", price: 7, description: "strong and harsh flavor profile", quantity: 50, image_url: "https://1kczi73sfs1d3t3z4i1ys5mf-wpengine.netdna-ssl.com/wp-content/uploads/2018/02/Robusta-coffee-beans-roatsted-close-up.jpg")
-    Product.create(name: "Liberica", price: 12, description: "fruity and woody flavor", quantity: 20, image_url: "https://sc04.alicdn.com/kf/UTB884cHm22JXKJkSanrq6y3lVXaI.jpg")
+    Product.create(name: "Liberica", price: 12, description: "fruity and woody flavor", quantity: 20, image_url: "https://crazycoffeecrave.com/wp-content/uploads/2021/03/Liberica-Coffee-Beans-930x600.jpg")
     Product.create(name: "Excelsa", price: 20,  description: "tart and fruity flavor", quantity: 15, image_url: "https://images-na.ssl-images-amazon.com/images/I/51EGHd7Io-L._AC_SY580_.jpg")
 
 puts '✅ Done seeding'

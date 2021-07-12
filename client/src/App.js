@@ -17,7 +17,8 @@ let [cartProducts, setCartProducts]= useState([]);
 // let [isLoggedIn, setIsLoggedIn] = useState(false);
 
   let addToCart = (product) => {
-     setCartProducts([...cartProducts, product])
+    if (!cartProducts.find((oldproduct) => product === oldproduct){
+     setCartProducts([...cartProducts, product])}
   }
              
   let removeFromCart = (products) => {

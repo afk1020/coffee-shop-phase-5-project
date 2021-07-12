@@ -6,7 +6,7 @@ import axios from "axios"
 import { useHistory } from 'react-router';
 
 
-export default function Profile({user, onDeleteUser, onEditUser, setUser}) {
+export default function Profile({user, onDeleteUser, onEditUser}) {
     let [name, setName] = useState("");
     // const  {id, name, password_digest} = user
     const history = useHistory()
