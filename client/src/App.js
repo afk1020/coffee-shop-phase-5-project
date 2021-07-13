@@ -13,12 +13,16 @@ import Profile from './Containers/Profile'
 
 export default function App() {
 let [user, setUser]= useState({})
+let [products, setProducts]= useState([])
 let [cartProducts, setCartProducts]= useState([]);
+let [cart, setCart]= useState([])
+let [cart_id, setCartId] =useState([])
 // let [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  let addToCart = (product) => {
-    if (!cartProducts.find((oldproduct) => product === oldproduct){
-     setCartProducts([...cartProducts, product])}
+
+  let addToCart = (products) => {
+    if(!cartProducts.find((oldproduct) => products === oldproduct))
+     setCartProducts([products])
   }
              
   let removeFromCart = (products) => {
@@ -35,8 +39,21 @@ let [cartProducts, setCartProducts]= useState([]);
     setUser((user) =>
       user.name !== editUsers.name)
   }
-  
-  // const {id, name, password_digest} = user
+
+  function setCartsItems(){
+    console.log(cartProducts)
+  // let stringCart = JSON.stringify(cartCopy);
+  // localStorage.setCartProducts("cart", stringCart);
+  fetch("/cart_items", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({products_id:products[0].id, user_id: user.id}),
+  })
+  .then(res => res.json())
+
+}
 
 useEffect(() => {
   // auto-login
@@ -47,6 +64,14 @@ useEffect(() => {
   });
 }, []);
 
+useEffect(() => {
+  fetch("/products").then((r)=> {
+    if (r.ok){
+      r.json().then((products)=>setProducts(products));
+    }
+  });
+}, []);
+         
 // if (!user) return <LoginForm onLogin={setUser}/>
 
 
@@ -83,10 +108,10 @@ useEffect(() => {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/products">
-            <Products addProduct={addToCart} />
+            <Products products={products} addProduct={addToCart} />
           </Route>
           <Route path="/cart">
-            <Cart cartProducts={cartProducts} removeFromCart={removeFromCart}/>
+            <Cart products={products} cartProducts={cartProducts} removeFromCart={removeFromCart} setCartsItems={setCartsItems}/>
           </Route>
           <Route path="/signup">
             <SignUp onLogin={setUser}/>

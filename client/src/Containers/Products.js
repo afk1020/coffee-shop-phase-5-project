@@ -3,20 +3,16 @@ import ProductsCard from '../Components/ProductsCard'
 
 class Products extends Component {
 
-  state = {
-      products:[]
-  }
 
-  componentDidMount () {
-    
-      fetch("/products")
-    			   .then((r) => r.json())
-    			   .then((data) => this.setState({products: data}))
-             
-  }
+
+  // componentDidMount () {
+  //     fetch("/products")
+  //   			   .then((r) => r.json())
+  //   			   .then((data) => this.setState({products: data}))     
+  // }
     
   render() {
-      let card = this.state.products.map(product => (
+      let card = this.props.products.map(product => (
           <ProductsCard
             product ={product}
             key = {product.id}
