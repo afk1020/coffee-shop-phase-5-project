@@ -8,7 +8,8 @@ import LoginForm from './Components/LoginForm'
 import Logout from './Components/Logout'
 import Products from './Containers/Products';
 import Cart from './Containers/Cart';
-import Profile from './Containers/Profile'
+import Profile from './Containers/Profile';
+import { useHistory } from 'react-router';
 
 
 export default function App() {
@@ -19,7 +20,7 @@ let [cart, setCart]= useState([])
 let [cart_id, setCartId] =useState([])
 // let [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
+let history = useHistory()
   let addToCart = (products) => {
     if(!cartProducts.find((oldproduct) => products === oldproduct))
      setCartProducts([products])
@@ -52,7 +53,8 @@ let [cart_id, setCartId] =useState([])
     body: JSON.stringify({products_id:products[0].id, user_id: user.id}),
   })
   .then(res => res.json())
-
+  alert("your cart has been submitted")
+  
 }
 
 useEffect(() => {
